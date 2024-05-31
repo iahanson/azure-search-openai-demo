@@ -1,6 +1,6 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 
-import rbkc_logo from "../../assets/RBKC_Logo.svg";
+import rbkc_logo from "../../assets/RBKC.png";
 
 import styles from "./Layout.module.css";
 
@@ -38,8 +38,8 @@ const Layout = () => {
                                         src={rbkc_logo}
                                         alt="RBKC logo"
                                         // aria-label="Link to github repository"
-                                        width="80px"
-                                        height="80px"
+                                        width="50px"
+                                        height="50px"
                                         className={styles.rbkcLogo}
                                     />
                                 </a>
