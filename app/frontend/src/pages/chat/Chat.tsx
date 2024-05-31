@@ -33,16 +33,16 @@ import { GPT4VSettings } from "../../components/GPT4VSettings";
 const Chat = () => {
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
     const [promptTemplate, setPromptTemplate] = useState<string>("");
-    const [temperature, setTemperature] = useState<number>(0.3);
+    const [temperature, setTemperature] = useState<number>(0.1);
     const [minimumRerankerScore, setMinimumRerankerScore] = useState<number>(0);
     const [minimumSearchScore, setMinimumSearchScore] = useState<number>(0);
-    const [retrieveCount, setRetrieveCount] = useState<number>(3);
+    const [retrieveCount, setRetrieveCount] = useState<number>(5);
     const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>(RetrievalMode.Hybrid);
     const [useSemanticRanker, setUseSemanticRanker] = useState<boolean>(true);
     const [shouldStream, setShouldStream] = useState<boolean>(true);
     const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(false);
     const [excludeCategory, setExcludeCategory] = useState<string>("");
-    const [useSuggestFollowupQuestions, setUseSuggestFollowupQuestions] = useState<boolean>(false);
+    const [useSuggestFollowupQuestions, setUseSuggestFollowupQuestions] = useState<boolean>(true);
     const [vectorFieldList, setVectorFieldList] = useState<VectorFieldOptions[]>([VectorFieldOptions.Embedding]);
     const [useOidSecurityFilter, setUseOidSecurityFilter] = useState<boolean>(false);
     const [useGroupsSecurityFilter, setUseGroupsSecurityFilter] = useState<boolean>(false);
@@ -294,8 +294,16 @@ const Chat = () => {
                     {!lastQuestionRef.current ? (
                         <div className={styles.chatEmptyState}>
                             <SparkleFilled fontSize={"120px"} primaryFill={"rgba(115, 118, 225, 1)"} aria-hidden="true" aria-label="Chat logo" />
-                            <h1 className={styles.chatEmptyStateTitle}>Chat with your data</h1>
+                            <h1 className={styles.chatEmptyStateTitle}>Chat with the guidance data on Procurement Act 2023 </h1>
                             <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
+                            <h3 className={styles.chatEmptyStateSubtitle}>
+                                <b>Caution</b>: all content is generated from a large language model and must be check by a human! You are responsable for any
+                                decisions made. <br></br>Read the{" "}
+                                <a href="https://officesharedservice.sharepoint.com/sites/RBKCAIHub/SitePages/Resources.aspx" target="_blank">
+                                    guidelines
+                                </a>{" "}
+                                on the K&C AI Hub.
+                            </h3>
                             <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />
                         </div>
                     ) : (

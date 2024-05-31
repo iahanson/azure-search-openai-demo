@@ -22,11 +22,11 @@ export function Component(): JSX.Element {
     const [promptTemplate, setPromptTemplate] = useState<string>("");
     const [promptTemplatePrefix, setPromptTemplatePrefix] = useState<string>("");
     const [promptTemplateSuffix, setPromptTemplateSuffix] = useState<string>("");
-    const [temperature, setTemperature] = useState<number>(0.3);
+    const [temperature, setTemperature] = useState<number>(0.1);
     const [minimumRerankerScore, setMinimumRerankerScore] = useState<number>(0);
     const [minimumSearchScore, setMinimumSearchScore] = useState<number>(0);
     const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>(RetrievalMode.Hybrid);
-    const [retrieveCount, setRetrieveCount] = useState<number>(3);
+    const [retrieveCount, setRetrieveCount] = useState<number>(5);
     const [useSemanticRanker, setUseSemanticRanker] = useState<boolean>(true);
     const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(false);
     const [useGPT4V, setUseGPT4V] = useState<boolean>(false);
@@ -204,6 +204,14 @@ export function Component(): JSX.Element {
                     <SettingsButton className={styles.commandButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} />
                 </div>
                 <h1 className={styles.askTitle}>Ask your data</h1>
+                <h3 className={styles.chatEmptyStateSubtitle}>
+                    <b>Caution</b>: all content is generated from a large language model and must be check by a human! You are responsable for any decisions
+                    made. <br></br>Read the{" "}
+                    <a href="https://officesharedservice.sharepoint.com/sites/RBKCAIHub/SitePages/Resources.aspx" target="_blank">
+                        guidelines
+                    </a>{" "}
+                    on the K&C AI Hub.
+                </h3>
                 <div className={styles.askQuestionInput}>
                     <QuestionInput
                         placeholder="Example: What do I need to know about the changes to the Procurement Law?"

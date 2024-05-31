@@ -1,6 +1,6 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 
-import github from "../../assets/github.svg";
+import rbkc_logo from "../../assets/RBKC_Logo.svg";
 
 import styles from "./Layout.module.css";
 
@@ -28,18 +28,22 @@ const Layout = () => {
                                     Ask a question
                                 </NavLink>
                             </li>
-                            {/* <li className={styles.headerNavLeftMargin}>
-                                <a href="https://aka.ms/entgptsearch" target={"_blank"} title="Github repository link">
+                            <li className={styles.headerNavLeftMargin}>
+                                <a
+                                    href="https://officesharedservice.sharepoint.com/sites/RBKCProcurementAct2023"
+                                    target={"_blank"}
+                                    title="Procurement SharePoint link"
+                                >
                                     <img
-                                        src={github}
-                                        alt="Github logo"
-                                        aria-label="Link to github repository"
-                                        width="20px"
-                                        height="20px"
-                                        className={styles.githubLogo}
+                                        src={rbkc_logo}
+                                        alt="RBKC logo"
+                                        // aria-label="Link to github repository"
+                                        width="80px"
+                                        height="80px"
+                                        className={styles.rbkcLogo}
                                     />
                                 </a>
-                            </li> */}
+                            </li>
                         </ul>
                     </nav>
                     <h4 className={styles.headerRightText}>Azure OpenAI + AI Search</h4>
