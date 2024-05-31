@@ -3,9 +3,11 @@ import { Example } from "./Example";
 import styles from "./Example.module.css";
 
 const DEFAULT_EXAMPLES: string[] = [
-    "What is included in my Northwind Health Plus plan that is not in standard?",
-    "What happens in a performance review?",
-    "What does a Product Manager do?"
+    "What technical specifications have changed from the 2015 Procurement Act?",
+    "What types of contracts are exempt from the 2023 Act?",
+    "What steps are needed to ensure a supplier is not put at an unfair advantage and/or to avoid competition being distorted?",
+    "At the beginning the procurement process, what are the top ten things I should be considering?",
+    "What do I need to know about the changes to the Procurement Act?"
 ];
 
 const GPT4V_EXAMPLES: string[] = [

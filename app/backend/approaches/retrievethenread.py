@@ -18,7 +18,7 @@ class RetrieveThenReadApproach(Approach):
     """
 
     system_chat_template = (
-        "You are an intelligent assistant helping Contoso Inc employees with their healthcare plan questions and employee handbook questions. "
+        "You are an intelligent assistant helping RBKC employees understand changes to the Procurement Act. "
         + "Use 'you' to refer to the individual asking the questions even if they ask with 'I'. "
         + "Answer the following question using only the data provided in the sources below. "
         + "For tabular information return it as an html table. Do not return markdown format. "
@@ -28,15 +28,15 @@ class RetrieveThenReadApproach(Approach):
 
     # shots/sample conversation
     question = """
-'What is the deductible for the employee plan for a visit to Overlake in Bellevue?'
+'What is the guidance for procurement of utilities contracts?'
 
 Sources:
-info1.txt: deductibles depend on whether you are in-network or out-of-network. In-network deductibles are $500 for employee and $1000 for family. Out-of-network deductibles are $1000 for employee and $2000 for family.
-info2.pdf: Overlake is in-network for the employee plan.
-info3.pdf: Overlake is the name of the area that includes a park and ride near Bellevue.
-info4.pdf: In-network institutions include Overlake, Swedish and others in the region
+info1.txt: contracts awarded for the purpose of further sale or lease to third parties of the goods, works or services supplied under those contracts (except where the utility is a centralised purchasing authority)..
+info2.pdf: The threshold for utilities works contract is £5,372,609
+info3.pdf: Utilities are public authorities, public undertakings or other entities (‘private utilities’) that carry out ‘utility activities’ in the energy, water and transport sectors. They are regulated by the Procurement Act 2023 (Act) when carrying out utility activities as they are not exposed to competitive forces in the market (but see section 6(5) and 6(6) of the Act and further below) and the UK is required by various international agreements to allow ‘treaty state suppliers’ with certain rights under relevant international agreements to participate in procurements for ‘utilities contracts’
+info4.pdf: The utilities provisions in the Act apply to utilities contracts that are public contracts. A utilities contract is a public contract where the estimated value of the contract exceeds the relevant thresholds; and the contract is not an exempted contract.
 """
-    answer = "In-network deductibles are $500 for employee and $1000 for family [info1.txt] and Overlake is in-network for the employee plan [info2.pdf][info4.pdf]."
+    answer = "The threshold for utilies contracts is £5,372,609 [info2.txt] and Utilities are large public undertakings or contracts. [info3.pdf][info4.pdf]."
 
     def __init__(
         self,
