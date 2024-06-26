@@ -295,15 +295,25 @@ const Chat = () => {
                         <div className={styles.chatEmptyState}>
                             <SparkleFilled fontSize={"120px"} primaryFill={"rgba(115, 118, 225, 1)"} aria-hidden="true" aria-label="Chat logo" />
                             <h1 className={styles.chatEmptyStateTitle}>Chat with the guidance data on Procurement Act 2023 </h1>
-                            <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
+
                             <h3 className={styles.chatEmptyStateSubtitle}>
-                                <b>Caution</b>: all content is generated from a large language model and must be check by a human! You are responsable for any
+                                <b>Caution</b>: all content is generated from a large language model and must be check by a human! You are responsible for any
                                 decisions made. <br></br>Read the{" "}
                                 <a href="https://officesharedservice.sharepoint.com/sites/RBKCAIHub/SitePages/Resources.aspx" target="_blank">
                                     guidelines
                                 </a>{" "}
-                                on the K&C AI Hub.
+                                on the K&C AI Hub. <br></br>
+                                <br></br>
+                                This is a Retrieval Augmented Generation application. Find out more{" "}
+                                <a
+                                    href="https://officesharedservice.sharepoint.com/sites/RBKCAIHub/SitePages/Retrieval-Augmented-Generation-(RAG).aspx"
+                                    target="_blank"
+                                >
+                                    {" "}
+                                    here.
+                                </a>
                             </h3>
+                            <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
                             <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />
                         </div>
                     ) : (

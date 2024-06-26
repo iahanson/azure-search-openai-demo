@@ -38,8 +38,8 @@ const Layout = () => {
                                         src={rbkc_logo}
                                         alt="RBKC logo"
                                         // aria-label="Link to github repository"
-                                        width="50px"
-                                        height="50px"
+                                        width="200px"
+                                        height="40px"
                                         className={styles.rbkcLogo}
                                     />
                                 </a>
