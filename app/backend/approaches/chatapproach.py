@@ -11,7 +11,7 @@ from approaches.approach import Approach
 class ChatApproach(Approach, ABC):
     query_prompt_few_shots: list[ChatCompletionMessageParam] = [
         {"role": "user", "content": "What are transitional and saving arrangements?"},
-        {"role": "assistant", "content": "Summarize the tranitional and saving arrangements from Procurement Act 2023 Guidance documents"},
+        {"role": "assistant", "content": "Summarize the transitional and saving arrangements from Procurement Act 2023 Guidance documents"},
         {"role": "user", "content": "What are thresholds?"},
         {"role": "assistant", "content": "Briefly describe the different threshold levels for procurement, according to the 2023 Act"},
     ]
@@ -96,6 +96,7 @@ class ChatApproach(Approach, ABC):
             chat_resp["choices"][0]["message"]["content"] = content
             chat_resp["choices"][0]["context"]["followup_questions"] = followup_questions
         chat_resp["choices"][0]["session_state"] = session_state
+        
         return chat_resp
 
     async def run_with_streaming(
