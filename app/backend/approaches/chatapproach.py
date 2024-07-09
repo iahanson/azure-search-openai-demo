@@ -93,10 +93,14 @@ class ChatApproach(Approach, ABC):
         chat_resp = chat_resp["choices"][0]
         chat_resp["context"] = extra_info
         if overrides.get("suggest_followup_questions"):
-            content, followup_questions = self.extract_followup_questions(chat_resp["choices"][0]["message"]["content"])
-            chat_resp["choices"][0]["message"]["content"] = content
-            chat_resp["choices"][0]["context"]["followup_questions"] = followup_questions
-        chat_resp["choices"][0]["session_state"] = session_state
+            #content, followup_questions = self.extract_followup_questions(chat_resp["choices"][0]["message"]["content"])
+            #chat_resp["choices"][0]["message"]["content"] = content
+            #chat_resp["choices"][0]["context"]["followup_questions"] = followup_questions    
+            content, followup_questions = self.extract_followup_questions(chat_resp["message"]["content"])
+            chat_resp["message"]["content"] = content
+            chat_resp["context"]["followup_questions"] = followup_questions
+        chat_resp["session_state"] = session_state        
+        #chat_resp["choices"][0]["session_state"] = session_state
         
         return chat_resp
 
