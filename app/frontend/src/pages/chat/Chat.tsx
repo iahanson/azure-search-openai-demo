@@ -335,7 +335,7 @@ const Chat = () => {
             <div className={styles.commandsContainer}>
                 <ClearChatButton className={styles.commandButton} onClick={clearChat} disabled={!lastQuestionRef.current || isLoading} />
                 {showUserUpload && <UploadFile className={styles.commandButton} disabled={!loggedIn} />}
-                <SettingsButton className={styles.commandButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} />
+                {/* <SettingsButton className={styles.commandButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} /> */}
             </div>
             <div className={styles.chatRoot}>
                 <div className={styles.chatContainer}>
@@ -360,6 +360,14 @@ const Chat = () => {
                                     {" "}
                                     here.
                                 </a>
+                                <br></br>Not getting the response you expected? Try altering
+                                your prompt - learn more{" "}
+                                <a
+                                href="https://officesharedservice.sharepoint.com/:b:/r/sites/RBKCAIHub/Shared%20Documents/AI%20Builder%20Prompting%20Guide.pdf#page=3?csf=1&web=1&e=1aF1Ts"
+                                target="_blank"
+                                >
+                                here
+                                </a>{" "}
                             </h3>
                             <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
                             <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />
