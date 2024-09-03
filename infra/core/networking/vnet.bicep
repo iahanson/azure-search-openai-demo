@@ -1,4 +1,4 @@
-metadata description = 'Creates a virtual network with 3 subnets (for AI, Azure Bastion, App Service).'
+/* metadata description = 'Creates a virtual network with 3 subnets (for AI, Azure Bastion, App Service).'
 
 @description('The location for the VNet')
 param location string
@@ -37,4 +37,4 @@ output subnetids array = [for (name, i) in subnets: {
 
 output id string = vnet.id
 output name string = vnet.name
-output vnetSubnets array = vnet.properties.subnets
+output vnetSubnets array = vnet.properties.subnets */

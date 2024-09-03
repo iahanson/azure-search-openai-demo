@@ -1,4 +1,4 @@
-metadata description = 'Creates an Azure Cognitive Services instance.'
+/* metadata description = 'Creates an Azure Cognitive Services instance.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -58,3 +58,4 @@ output endpoint string = account.properties.endpoint
 output id string = account.id
 output name string = account.name
 output location string = account.location
+ */

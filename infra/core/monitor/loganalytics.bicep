@@ -1,4 +1,4 @@
-metadata description = 'Creates a Log Analytics workspace.'
+/* metadata description = 'Creates a Log Analytics workspace.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -25,4 +25,4 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2021-12-01-previ
 }
 
 output id string = logAnalytics.id
-output name string = logAnalytics.name
+output name string = logAnalytics.name */

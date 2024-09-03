@@ -1,4 +1,4 @@
-metadata description = 'Creates an Azure storage account.'
+/* metadata description = 'Creates an Azure storage account.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -68,3 +68,4 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
 output id string = storage.id
 output name string = storage.name
 output primaryEndpoints object = storage.properties.primaryEndpoints
+ */

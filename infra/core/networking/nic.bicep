@@ -1,4 +1,4 @@
-param name string
+/* param name string
 param location string
 param subnetId string
 
@@ -20,4 +20,4 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-05-01' = {
   }
 }
 
-output id string = nic.id
+output id string = nic.id */

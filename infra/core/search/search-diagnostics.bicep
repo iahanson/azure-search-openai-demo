@@ -1,4 +1,4 @@
-param searchServiceName string = ''
+/* param searchServiceName string = ''
 
 @description('Resource ID of log analytics workspace.')
 param workspaceId string
@@ -39,3 +39,4 @@ resource app_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05-0
     logs: diagnosticsLogs
   }
 }
+ */

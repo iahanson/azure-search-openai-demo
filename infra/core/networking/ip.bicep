@@ -1,4 +1,4 @@
-param name string
+/* param name string
 param location string
 
 resource publicIp 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
@@ -12,4 +12,4 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
   }
 }
 
-output id string = publicIp.id
+output id string = publicIp.id */

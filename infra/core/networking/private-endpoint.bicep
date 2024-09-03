@@ -1,4 +1,4 @@
-metadata description = 'Create a private endpoint for a given sub-resource, subnet, and private DNS zone group'
+/* metadata description = 'Create a private endpoint for a given sub-resource, subnet, and private DNS zone group'
 
 @description('The location for the private endpoint')
 param location string
@@ -58,4 +58,4 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-02-01' = {
 }
 
 output name string = privateEndpoint.name
-output id string = privateEndpoint.id
+output id string = privateEndpoint.id */

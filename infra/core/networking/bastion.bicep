@@ -1,4 +1,4 @@
-param name string
+/* param name string
 param location string
 param publicIPId string
 param subnetId string
@@ -21,4 +21,4 @@ resource bastionHost 'Microsoft.Network/bastionHosts@2022-01-01' = {
       }
     ]
   }
-}
+} */

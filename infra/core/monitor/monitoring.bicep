@@ -1,4 +1,4 @@
-metadata description = 'Creates an Application Insights instance and a Log Analytics workspace.'
+/* metadata description = 'Creates an Application Insights instance and a Log Analytics workspace.'
 param logAnalyticsName string
 param applicationInsightsName string
 param applicationInsightsDashboardName string = ''
@@ -36,4 +36,4 @@ output applicationInsightsInstrumentationKey string = applicationInsights.output
 output applicationInsightsName string = applicationInsights.outputs.name
 output applicationInsightsId string = applicationInsights.outputs.id
 output logAnalyticsWorkspaceId string = logAnalytics.outputs.id
-output logAnalyticsWorkspaceName string = logAnalytics.outputs.name
+output logAnalyticsWorkspaceName string = logAnalytics.outputs.name */

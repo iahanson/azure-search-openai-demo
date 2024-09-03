@@ -1,4 +1,4 @@
-metadata description = 'Creates an Application Insights instance based on an existing Log Analytics workspace.'
+/* metadata description = 'Creates an Application Insights instance based on an existing Log Analytics workspace.'
 param name string
 param dashboardName string = ''
 param location string = resourceGroup().location
@@ -34,4 +34,4 @@ module applicationInsightsDashboard 'applicationinsights-dashboard.bicep' = if (
 output connectionString string = applicationInsights.properties.ConnectionString
 output instrumentationKey string = applicationInsights.properties.InstrumentationKey
 output name string = applicationInsights.name
-output id string = applicationInsights.id
+output id string = applicationInsights.id */

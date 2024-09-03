@@ -1,4 +1,4 @@
-param name string
+/* param name string
 param location string
 param vmSize string = 'Standard_DS1_v2'
 param adminUsername string
@@ -65,4 +65,4 @@ resource vm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
     }
     securityProfile: ((securityType == 'TrustedLaunch') ? securityProfileJson : null)
   }
-}
+} */

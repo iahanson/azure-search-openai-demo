@@ -1,4 +1,4 @@
-metadata description = 'Creates a role assignment for a service principal.'
+/* metadata description = 'Creates a role assignment for a service principal.'
 param principalId string
 
 @allowed([
@@ -19,3 +19,4 @@ resource role 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
   }
 }
+ */

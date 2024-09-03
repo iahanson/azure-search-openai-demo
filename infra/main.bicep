@@ -37,6 +37,8 @@ param storageSkuName string // Set in main.parameters.json
 
 param userStorageAccountName string = ''
 param userStorageContainerName string = 'user-content'
+param documentIntelligence string // Set in main.parameters.json **************************************** added
+param userStorage string // Set in main.parameters.json************************* added
 
 param appServiceSkuName string // Set in main.parameters.json
 
@@ -120,7 +122,7 @@ var embedding = {
 param gpt4vModelName string = 'gpt-4o'
 param gpt4vDeploymentName string = 'gpt-4o'
 param gpt4vModelVersion string = '2024-05-13'
-param gpt4vDeploymentCapacity int = 10
+param gpt4vDeploymentCapacity int = 10 
 
 param tenantId string = tenant().tenantId
 param authTenantId string = ''
@@ -153,6 +155,7 @@ param usePrivateEndpoint bool = false
 
 @description('Provision a VM to use for private endpoint connectivity')
 param provisionVm bool = false
+/* 
 param vmUserName string = ''
 @secure()
 param vmPassword string = ''
@@ -160,7 +163,7 @@ param vmOsVersion string = ''
 param vmOsPublisher string = ''
 param vmOsOffer string = ''
 @description('Size of the virtual machine.')
-param vmSize string = 'Standard_DS1_v2'
+param vmSize string = 'Standard_DS1_v2' */
 
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
@@ -203,7 +206,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
   tags: tags
 }
-
+/* 
 resource openAiResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (!empty(openAiResourceGroupName)) {
   name: !empty(openAiResourceGroupName) ? openAiResourceGroupName : resourceGroup.name
 }
@@ -227,29 +230,29 @@ resource storageResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' ex
 resource speechResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (!empty(speechServiceResourceGroupName)) {
   name: !empty(speechServiceResourceGroupName) ? speechServiceResourceGroupName : resourceGroup.name
 }
-
+ */
 // Monitor application with Azure Monitor
-module monitoring 'core/monitor/monitoring.bicep' = if (useApplicationInsights) {
-  name: 'monitoring'
-  scope: resourceGroup
-  params: {
-    location: location
-    tags: tags
-    applicationInsightsName: !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${resourceToken}'
-    logAnalyticsName: !empty(logAnalyticsName) ? logAnalyticsName : '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
-    publicNetworkAccess: publicNetworkAccess
-  }
-}
+// module monitoring 'core/monitor/monitoring.bicep' = if (useApplicationInsights) {
+//   name: 'monitoring'
+//   scope: resourceGroup
+//   params: {
+//     location: location
+//     tags: tags
+//     applicationInsightsName: !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${resourceToken}'
+//     logAnalyticsName: !empty(logAnalyticsName) ? logAnalyticsName : '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
+//     publicNetworkAccess: publicNetworkAccess
+//   }
+// }
 
-module applicationInsightsDashboard 'backend-dashboard.bicep' = if (useApplicationInsights) {
-  name: 'application-insights-dashboard'
-  scope: resourceGroup
-  params: {
-    name: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
-    location: location
-    applicationInsightsName: useApplicationInsights ? monitoring.outputs.applicationInsightsName : ''
-  }
-}
+// module applicationInsightsDashboard 'backend-dashboard.bicep' = if (useApplicationInsights) {
+//   name: 'application-insights-dashboard'
+//   scope: resourceGroup
+//   params: {
+//     name: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
+//     location: location
+//     applicationInsightsName: useApplicationInsights ? monitoring.outputs.applicationInsightsName : ''
+//   }
+// }
 
 // Create an App Service Plan to group applications under the same payment plan and SKU
 module appServicePlan 'core/host/appserviceplan.bicep' = {
@@ -281,7 +284,7 @@ module backend 'core/host/appservice.bicep' = {
     appCommandLine: 'python3 -m gunicorn main:app'
     scmDoBuildDuringDeployment: true
     managedIdentity: true
-    virtualNetworkSubnetId: isolation.outputs.appSubnetId
+    //virtualNetworkSubnetId: isolation.outputs.appSubnetId
     publicNetworkAccess: publicNetworkAccess
     allowedOrigins: [ allowedOrigin ]
     clientAppId: clientAppId
@@ -292,17 +295,17 @@ module backend 'core/host/appservice.bicep' = {
     use32BitWorkerProcess: appServiceSkuName == 'F1'
     alwaysOn: appServiceSkuName != 'F1'
     appSettings: {
-      AZURE_STORAGE_ACCOUNT: storage.outputs.name
+      AZURE_STORAGE_ACCOUNT: storageAccountName //storage.outputs.name
       AZURE_STORAGE_CONTAINER: storageContainerName
       AZURE_SEARCH_INDEX: searchIndexName
-      AZURE_SEARCH_SERVICE: searchService.outputs.name
+      AZURE_SEARCH_SERVICE: searchServiceName //searchService.outputs.name
       AZURE_SEARCH_SEMANTIC_RANKER: actualSearchServiceSemanticRankerLevel
-      AZURE_VISION_ENDPOINT: useGPT4V ? computerVision.outputs.endpoint : ''
+      //AZURE_VISION_ENDPOINT: useGPT4V ? computerVision.outputs.endpoint : ''
       AZURE_SEARCH_QUERY_LANGUAGE: searchQueryLanguage
       AZURE_SEARCH_QUERY_SPELLER: searchQuerySpeller
-      APPLICATIONINSIGHTS_CONNECTION_STRING: useApplicationInsights ? monitoring.outputs.applicationInsightsConnectionString : ''
-      AZURE_SPEECH_SERVICE_ID: useSpeechOutputAzure ? speech.outputs.id : ''
-      AZURE_SPEECH_SERVICE_LOCATION: useSpeechOutputAzure ? speech.outputs.location : ''
+      //APPLICATIONINSIGHTS_CONNECTION_STRING: useApplicationInsights ? monitoring.outputs.applicationInsightsConnectionString : ''
+      //AZURE_SPEECH_SERVICE_ID: useSpeechOutputAzure ? speech.outputs.id : ''
+      //AZURE_SPEECH_SERVICE_LOCATION: useSpeechOutputAzure ? speech.outputs.location : ''
       USE_SPEECH_INPUT_BROWSER: useSpeechInputBrowser
       USE_SPEECH_OUTPUT_BROWSER: useSpeechOutputBrowser
       USE_SPEECH_OUTPUT_AZURE: useSpeechOutputAzure
@@ -313,7 +316,7 @@ module backend 'core/host/appservice.bicep' = {
       AZURE_OPENAI_CHATGPT_MODEL: chatGpt.modelName
       AZURE_OPENAI_GPT4V_MODEL: gpt4vModelName
       // Specific to Azure OpenAI
-      AZURE_OPENAI_SERVICE: isAzureOpenAiHost && deployAzureOpenAi ? openAi.outputs.name : ''
+      AZURE_OPENAI_SERVICE: isAzureOpenAiHost && deployAzureOpenAi ? openAiServiceName : '' //openAi.outputs.name
       AZURE_OPENAI_CHATGPT_DEPLOYMENT: chatGpt.deploymentName
       AZURE_OPENAI_EMB_DEPLOYMENT: embedding.deploymentName
       AZURE_OPENAI_GPT4V_DEPLOYMENT: useGPT4V ? gpt4vDeploymentName : ''
@@ -340,15 +343,15 @@ module backend 'core/host/appservice.bicep' = {
       USE_VECTORS: useVectors
       USE_GPT4V: useGPT4V
       USE_USER_UPLOAD: useUserUpload
-      AZURE_USERSTORAGE_ACCOUNT: useUserUpload ? userStorage.outputs.name : ''
+      AZURE_USERSTORAGE_ACCOUNT: useUserUpload ? userStorage : ''  //userStorage.outputs.name
       AZURE_USERSTORAGE_CONTAINER: useUserUpload ? userStorageContainerName : ''
-      AZURE_DOCUMENTINTELLIGENCE_SERVICE: documentIntelligence.outputs.name
+      AZURE_DOCUMENTINTELLIGENCE_SERVICE: documentIntelligence //documentIntelligence.outputs.name
       USE_LOCAL_PDF_PARSER: useLocalPdfParser
       USE_LOCAL_HTML_PARSER: useLocalHtmlParser
     }
   }
 }
-
+/* 
 var defaultOpenAiDeployments = [
   {
     name: chatGpt.deploymentName
@@ -715,23 +718,22 @@ module isolation 'network-isolation.bicep' = {
 }
 
 var environmentData = environment()
-
-var openAiPrivateEndpointConnection = (isAzureOpenAiHost && deployAzureOpenAi) ? [{
-  groupId: 'account'
-  dnsZoneName: 'privatelink.openai.azure.com'
-  resourceIds: concat(
-    [ openAi.outputs.id ],
-    useGPT4V ? [ computerVision.outputs.id ] : [],
-    !useLocalPdfParser ? [ documentIntelligence.outputs.id ] : []
-  )
-}] : []
-var otherPrivateEndpointConnections = usePrivateEndpoint ? [
+var privateEndpointConnections = usePrivateEndpoint ? [
   {
     groupId: 'blob'
     dnsZoneName: 'privatelink.blob.${environmentData.suffixes.storage}'
     resourceIds: concat(
       [ storage.outputs.id ],
       useUserUpload ? [ userStorage.outputs.id ] : []
+    )
+  }
+  {
+    groupId: 'account'
+    dnsZoneName: 'privatelink.openai.azure.com'
+    resourceIds: concat(
+      [ openAi.outputs.id ],
+      useGPT4V ? [ computerVision.outputs.id ] : [],
+      !useLocalPdfParser ? [ documentIntelligence.outputs.id ] : []
     )
   }
   {
@@ -745,9 +747,6 @@ var otherPrivateEndpointConnections = usePrivateEndpoint ? [
     resourceIds: [ backend.outputs.id ]
   }
 ] : []
-
-
-var privateEndpointConnections = concat(otherPrivateEndpointConnections, openAiPrivateEndpointConnection)
 
 module privateEndpoints 'private-endpoints.bicep' = if (usePrivateEndpoint) {
   name: 'privateEndpoints'
@@ -824,7 +823,7 @@ module documentIntelligenceRoleBackend 'core/security/role.bicep' = if (useUserU
     principalType: 'ServicePrincipal'
   }
 }
-
+ */
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenantId
 output AZURE_AUTH_TENANT_ID string = authTenantId
@@ -837,34 +836,34 @@ output AZURE_OPENAI_CHATGPT_MODEL string = chatGpt.modelName
 output AZURE_OPENAI_GPT4V_MODEL string = gpt4vModelName
 
 // Specific to Azure OpenAI
-output AZURE_OPENAI_SERVICE string = isAzureOpenAiHost && deployAzureOpenAi ? openAi.outputs.name : ''
+output AZURE_OPENAI_SERVICE string = isAzureOpenAiHost && deployAzureOpenAi ? openAiServiceName : ''  //openAi.outputs.name
 output AZURE_OPENAI_API_VERSION string = isAzureOpenAiHost ? azureOpenAiApiVersion : ''
-output AZURE_OPENAI_RESOURCE_GROUP string = isAzureOpenAiHost ? openAiResourceGroup.name : ''
+output AZURE_OPENAI_RESOURCE_GROUP string = isAzureOpenAiHost ? openAiResourceGroupName : ''  //openAiResourceGroup.name 
 output AZURE_OPENAI_CHATGPT_DEPLOYMENT string = isAzureOpenAiHost ? chatGpt.deploymentName : ''
 output AZURE_OPENAI_EMB_DEPLOYMENT string = isAzureOpenAiHost ? embedding.deploymentName : ''
 output AZURE_OPENAI_GPT4V_DEPLOYMENT string = isAzureOpenAiHost ? gpt4vDeploymentName : ''
 
-output AZURE_SPEECH_SERVICE_ID string = useSpeechOutputAzure ? speech.outputs.id : ''
-output AZURE_SPEECH_SERVICE_LOCATION string = useSpeechOutputAzure ? speech.outputs.location : ''
+//output AZURE_SPEECH_SERVICE_ID string = useSpeechOutputAzure ? speech.outputs.id : ''
+//output AZURE_SPEECH_SERVICE_LOCATION string = useSpeechOutputAzure ? speech.outputs.location : ''
 
-output AZURE_VISION_ENDPOINT string = useGPT4V ? computerVision.outputs.endpoint : ''
+//output AZURE_VISION_ENDPOINT string = useGPT4V ? computerVision.outputs.endpoint : ''
 
-output AZURE_DOCUMENTINTELLIGENCE_SERVICE string = documentIntelligence.outputs.name
-output AZURE_DOCUMENTINTELLIGENCE_RESOURCE_GROUP string = documentIntelligenceResourceGroup.name
+output AZURE_DOCUMENTINTELLIGENCE_SERVICE string = documentIntelligenceServiceName //documentIntelligence.outputs.name
+output AZURE_DOCUMENTINTELLIGENCE_RESOURCE_GROUP string = documentIntelligenceResourceGroupName //documentIntelligenceResourceGroup.name
 
 output AZURE_SEARCH_INDEX string = searchIndexName
-output AZURE_SEARCH_SERVICE string = searchService.outputs.name
-output AZURE_SEARCH_SERVICE_RESOURCE_GROUP string = searchServiceResourceGroup.name
+output AZURE_SEARCH_SERVICE string = searchServiceName //searchService.outputs.name
+output AZURE_SEARCH_SERVICE_RESOURCE_GROUP string = searchServiceResourceGroupName //searchServiceResourceGroup.name
 output AZURE_SEARCH_SEMANTIC_RANKER string = actualSearchServiceSemanticRankerLevel
-output AZURE_SEARCH_SERVICE_ASSIGNED_USERID string = searchService.outputs.principalId
+//output AZURE_SEARCH_SERVICE_ASSIGNED_USERID string = searchService.outputs.principalId
 
-output AZURE_STORAGE_ACCOUNT string = storage.outputs.name
+output AZURE_STORAGE_ACCOUNT string = storageAccountName //storage.outputs.name
 output AZURE_STORAGE_CONTAINER string = storageContainerName
-output AZURE_STORAGE_RESOURCE_GROUP string = storageResourceGroup.name
+output AZURE_STORAGE_RESOURCE_GROUP string = storageResourceGroupName //storageResourceGroup.name
 
-output AZURE_USERSTORAGE_ACCOUNT string = useUserUpload ? userStorage.outputs.name : ''
+output AZURE_USERSTORAGE_ACCOUNT string = useUserUpload ? storageAccountName : '' //userStorage.outputs.name 
 output AZURE_USERSTORAGE_CONTAINER string = userStorageContainerName
-output AZURE_USERSTORAGE_RESOURCE_GROUP string = storageResourceGroup.name
+output AZURE_USERSTORAGE_RESOURCE_GROUP string = storageResourceGroupName //storageResourceGroup.name
 
 output AZURE_USE_AUTHENTICATION bool = useAuthentication
 

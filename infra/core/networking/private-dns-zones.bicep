@@ -1,4 +1,4 @@
-metadata description = 'Creates a private DNS zone and links it to an existing virtual network'
+/* metadata description = 'Creates a private DNS zone and links it to an existing virtual network'
 
 @description('The name of the private DNS zone')
 param dnsZoneName string
@@ -36,4 +36,4 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 
 output privateDnsZoneName string = dnsZone.name
-output id string = dnsZone.id
+output id string = dnsZone.id */
